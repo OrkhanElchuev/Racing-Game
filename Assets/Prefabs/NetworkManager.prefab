@@ -43,4 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65df80e3f32e6346ab5dd50ceb6d4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loginUIPanel: {fileID: 0}
   playerNameInput: {fileID: 0}
+  connectingInfoUIPanel: {fileID: 0}
+  creatingRoomInfoUIPanel: {fileID: 0}
+  gameOptionsUIPanel: {fileID: 0}
+  createRoomUIPanel: {fileID: 0}
+  insideRoomUIPanel: {fileID: 0}
+  joinRandomRoomUIPanel: {fileID: 0}

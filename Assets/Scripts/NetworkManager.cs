@@ -24,17 +24,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [Header("Inside Room Panel")]
     public GameObject insideRoomUIPanel;
-   
+
     [Header("Join Random Room Panel")]
     public GameObject joinRandomRoomUIPanel;
 
-    
+
     #region Unity Methods
 
     // Start is called before the first frame update
     void Start()
     {
-         
+        // Activate login Panel when the game starts
+        ActivatePanel(loginUIPanel.name);
     }
 
     // Update is called once per frame
@@ -44,7 +45,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     #endregion
-    
+
     #region Public Methods
 
     // Activate relevant panel
@@ -62,11 +63,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region UI Callback methods
 
+    // Login button is located in Login Panel 
     public void OnLoginButtonClicked()
     {
         string playerName = playerNameInput.text;
         if (!string.IsNullOrEmpty(playerName))
         {
+            ActivatePanel(connectingInfoUIPanel.name);
             if (!PhotonNetwork.IsConnected)
             {
                 // Set the player name in network and connect 
@@ -93,9 +96,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // On connected to the Photon Server
     public override void OnConnectedToMaster()
     {
+        ActivatePanel(gameOptionsUIPanel.name);
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " is connected to the server");
     }
-
 
     #endregion
 }

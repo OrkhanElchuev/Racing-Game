@@ -5093,10 +5093,10 @@ RectTransform:
   m_Father: {fileID: 1897633496}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 959.99994, y: -540}
-  m_SizeDelta: {x: 450, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1425780401
 MonoBehaviour:
@@ -6021,10 +6021,10 @@ RectTransform:
   m_Father: {fileID: 1897633496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 959.99994, y: -340}
-  m_SizeDelta: {x: 450, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1632187818
 MonoBehaviour:
@@ -6089,7 +6089,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1405733042}
         m_MethodName: ActivatePanel
         m_Mode: 5
         m_Arguments:
@@ -6846,7 +6846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1897633496
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7468,9 +7468,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
+      propertyPath: loginUIPanel
+      value: 
+      objectReference: {fileID: 1898342735}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
       propertyPath: playerNameInput
       value: 
       objectReference: {fileID: 237746957}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: connectingInfoUIPanel
+      value: 
+      objectReference: {fileID: 751703433}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: creatingRoomInfoUIPanel
+      value: 
+      objectReference: {fileID: 346571420}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: gameOptionsUIPanel
+      value: 
+      objectReference: {fileID: 1897633495}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: createRoomUIPanel
+      value: 
+      objectReference: {fileID: 274552716}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: insideRoomUIPanel
+      value: 
+      objectReference: {fileID: 1598625407}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: joinRandomRoomUIPanel
+      value: 
+      objectReference: {fileID: 1438516555}
     - target: {fileID: 196050645117304323, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
       propertyPath: m_LocalPosition.x

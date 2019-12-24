@@ -63,12 +63,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region UI Callback methods
 
+    // Cancel button is located in Create Room Panel
+    public void OnCancelButtonClicked()
+    {
+        ActivatePanel(gameOptionsUIPanel.name);
+    }
+
     // Login button is located in Login Panel 
     public void OnLoginButtonClicked()
     {
+        // Get player name from user and assign it
         string playerName = playerNameInput.text;
         if (!string.IsNullOrEmpty(playerName))
         {
+            // Make transition to Connecting scene till connection to Photon Server is established
             ActivatePanel(connectingInfoUIPanel.name);
             if (!PhotonNetwork.IsConnected)
             {

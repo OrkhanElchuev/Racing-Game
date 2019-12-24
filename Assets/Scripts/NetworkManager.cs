@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [Header("Login UI")]
     public GameObject loginUIPanel;
-    public InputField playerNameInput;
+    public InputField playerNameInputField;
 
     [Header("Connecting Info Panel")]
     public GameObject connectingInfoUIPanel;
@@ -21,6 +22,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [Header("Create Room Panel")]
     public GameObject createRoomUIPanel;
+    public InputField roomNameInputField;
 
     [Header("Inside Room Panel")]
     public GameObject insideRoomUIPanel;
@@ -63,6 +65,27 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region UI Callback methods
 
+    // Create room button is located in Create Room Panel
+    public void OnCreateRoomButtonClicked()
+    {
+        // Assign roomName to the room name entered by user
+        string roomName = roomNameInputField.text;
+        if (string.IsNullOrEmpty(roomName))
+        {
+            // If room name is not entered generate random room name(e.g. Room 243)
+            roomName = "Room " + Random.Range(1, 1000);
+        }
+        // Set room configurations
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 3;
+
+        string[] roomPropertiesInLobby = {"gameMode"};
+
+        roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
+
+        // PhotonNetwork.CreateRoom(roomName, );
+    }
+
     // Cancel button is located in Create Room Panel
     public void OnCancelButtonClicked()
     {
@@ -72,15 +95,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // Login button is located in Login Panel 
     public void OnLoginButtonClicked()
     {
-        // Get player name from user and assign it
-        string playerName = playerNameInput.text;
+        // Assign playerName to the player name entered by user
+        string playerName = playerNameInputField.text;
         if (!string.IsNullOrEmpty(playerName))
         {
-            // Make transition to Connecting scene till connection to Photon Server is established
+            // Make transition to Connecting panel till connection to Photon Server is established
             ActivatePanel(connectingInfoUIPanel.name);
             if (!PhotonNetwork.IsConnected)
             {
-                // Set the player name in network and connect 
+                // Set the player name in server and connect 
                 PhotonNetwork.LocalPlayer.NickName = playerName;
                 PhotonNetwork.ConnectUsingSettings();
             }

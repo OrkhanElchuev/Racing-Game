@@ -23,6 +23,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [Header("Create Room Panel")]
     public GameObject createRoomUIPanel;
     public InputField roomNameInputField;
+    private string gameMode;
 
     [Header("Inside Room Panel")]
     public GameObject insideRoomUIPanel;
@@ -50,6 +51,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region Public Methods
 
+    public void SetGameMode(string newGameMode)
+    {
+        gameMode = newGameMode;
+    }
+
     // Activate relevant panel
     public void ActivatePanel(string panelNameToBeActivated)
     {
@@ -68,26 +74,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // Create room button is located in Create Room Panel
     public void OnCreateRoomButtonClicked()
     {
-        // Assign roomName to the room name entered by user
-        string roomName = roomNameInputField.text;
-        if (string.IsNullOrEmpty(roomName))
+        // Check if game mode exists
+        if (gameMode != null)
         {
-            // If room name is not entered generate random room name(e.g. Room 243)
-            roomName = "Room " + Random.Range(1, 1000);
+            ActivatePanel(creatingRoomInfoUIPanel.name);
+            // Assign roomName to the room name entered by user
+            string roomName = roomNameInputField.text;
+            if (string.IsNullOrEmpty(roomName))
+            {
+                // If room name is not entered generate random room name(e.g. Room 243)
+                roomName = "Room " + Random.Range(1, 1000);
+            }
+            // Set room configurations
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 3;
+
+            string[] roomPropertiesInLobby = { "gameMode" };
+            // Create new hashtable in Photon server
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable()
+            {{"gameMode", gameMode}};
+            // Assign custom room properties
+            roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
+            roomOptions.CustomRoomProperties = customRoomProperties;
+            // Create room with relevant name and option
+            PhotonNetwork.CreateRoom(roomName, roomOptions);
         }
-        // Set room configurations
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 3;
-
-        string[] roomPropertiesInLobby = { "gameMode" };
-        // Create new hashtable in Photon server
-        ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable()
-            {{"gameMode", "racing"}};
-
-        roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
-        roomOptions.CustomRoomProperties = customRoomProperties;
-
-        PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
 
     // Cancel button is located in Create Room Panel

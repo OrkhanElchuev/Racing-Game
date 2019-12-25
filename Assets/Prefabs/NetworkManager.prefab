@@ -44,10 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loginUIPanel: {fileID: 0}
-  playerNameInput: {fileID: 0}
+  playerNameInputField: {fileID: 0}
   connectingInfoUIPanel: {fileID: 0}
   creatingRoomInfoUIPanel: {fileID: 0}
   gameOptionsUIPanel: {fileID: 0}
   createRoomUIPanel: {fileID: 0}
+  roomNameInputField: {fileID: 0}
   insideRoomUIPanel: {fileID: 0}
   joinRandomRoomUIPanel: {fileID: 0}

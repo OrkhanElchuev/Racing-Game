@@ -79,11 +79,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 3;
 
-        string[] roomPropertiesInLobby = {"gameMode"};
+        string[] roomPropertiesInLobby = { "gameMode" };
+        // Create new hashtable in Photon server
+        ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable()
+            {{"gameMode", "racing"}};
 
         roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
+        roomOptions.CustomRoomProperties = customRoomProperties;
 
-        // PhotonNetwork.CreateRoom(roomName, );
+        PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
 
     // Cancel button is located in Create Room Panel
@@ -129,6 +133,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         ActivatePanel(gameOptionsUIPanel.name);
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " is connected to the server");
+    }
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log(PhotonNetwork.CurrentRoom.Name + " is created.");
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
+        // Check if room contains a game mode (e.g. Racing, DeathMatch)
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gameMode"))
+        {
+            object gameModeName;
+            // Get the reference to the game mode name and assign it to gameModeName object
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("gameMode", out gameModeName))
+            {
+                Debug.Log(gameModeName.ToString());
+            }
+        }
     }
 
     #endregion

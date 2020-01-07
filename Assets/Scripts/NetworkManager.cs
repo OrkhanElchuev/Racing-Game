@@ -71,6 +71,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region UI Callback methods
 
+    // TODO finish the functionality of this method
+    public void OnJoinRandomRoomButtonClicked(string gameMode)
+    {
+        ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = 
+            new ExitGames.Client.Photon.Hashtable() { {"gameMode", gameMode} };
+        PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
+    }
+
     // Create room button is located in Create Room Panel
     public void OnCreateRoomButtonClicked()
     {

@@ -71,11 +71,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region UI Callback methods
 
-    // TODO finish the functionality of this method
-    public void OnJoinRandomRoomButtonClicked(string gameMode)
+    // Join Room button is located in Game Options Panel
+    public void OnJoinRandomRoomButtonClicked(string gameModeArg)
     {
-        ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = 
-            new ExitGames.Client.Photon.Hashtable() { {"gameMode", gameMode} };
+        gameMode = gameModeArg;
+        ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties =
+            new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameModeArg } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
 
@@ -171,6 +172,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             {
                 Debug.Log(gameModeName.ToString());
             }
+        }
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        // If room doesnt exist, create one
+        if (gameMode != null)
+        {
+            // Assign roomName to the room name entered by user
+            string roomName = roomNameInputField.text;
+            if (string.IsNullOrEmpty(roomName))
+            {
+                // If room name is not entered generate random room name(e.g. Room 243)
+                roomName = "Room " + Random.Range(1, 1000);
+            }
+            // Set room configurations
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 3;
+
+            string[] roomPropertiesInLobby = { "gameMode" };
+            // Create new hashtable in Photon server
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable()
+            {{"gameMode", gameMode}};
+            // Assign custom room properties
+            roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
+            roomOptions.CustomRoomProperties = customRoomProperties;
+            // Create room with relevant name and option
+            PhotonNetwork.CreateRoom(roomName, roomOptions);
         }
     }
 

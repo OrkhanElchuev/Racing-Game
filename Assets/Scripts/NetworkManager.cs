@@ -162,7 +162,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +
+         "Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
+        
+        ActivatePanel(insideRoomUIPanel.name);
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
         if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gameMode"))
         {

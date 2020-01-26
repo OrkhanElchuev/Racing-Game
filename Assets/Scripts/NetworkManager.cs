@@ -65,6 +65,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         createRoomUIPanel.SetActive(createRoomUIPanel.name.Equals(panelNameToBeActivated));
         gameOptionsUIPanel.SetActive(gameOptionsUIPanel.name.Equals(panelNameToBeActivated));
         joinRandomRoomUIPanel.SetActive(joinRandomRoomUIPanel.name.Equals(panelNameToBeActivated));
+        insideRoomUIPanel.SetActive(insideRoomUIPanel.name.Equals(panelNameToBeActivated));
     }
 
     #endregion
@@ -138,6 +139,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    // Back button is located in Join Random Room Panel
+    public void OnBackButtonClicked()
+    {
+        ActivatePanel(gameOptionsUIPanel.name);
+    }
+
     #endregion
 
     #region Photon Callbacks
@@ -164,7 +171,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +
          "Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
-        
+
         ActivatePanel(insideRoomUIPanel.name);
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
         if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gameMode"))

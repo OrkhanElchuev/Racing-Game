@@ -41,12 +41,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ActivatePanel(loginUIPanel.name);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     #endregion
 
     #region Public Methods

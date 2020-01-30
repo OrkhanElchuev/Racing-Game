@@ -34,6 +34,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [Header("Join Random Room Panel")]
     public GameObject joinRandomRoomUIPanel;
 
+    private Dictionary<int, GameObject> playerListGameObjects;
+
+    // Methods
+
     #region Unity Methods
 
     // Start is called before the first frame update
@@ -162,6 +166,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log(PhotonNetwork.CurrentRoom.Name + " is created.");
     }
 
+    // When player joins room
     public override void OnJoinedRoom()
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +
@@ -174,15 +179,56 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
                 " Players/Max.Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " +
                 PhotonNetwork.CurrentRoom.MaxPlayers;
+
+            if (playerListGameObjects == null)
+            {
+                playerListGameObjects = new Dictionary<int, GameObject>();
+            }
+
             // List newly joined players in the table
             foreach (Player player in PhotonNetwork.PlayerList)
             {
                 GameObject playerListGameObject = Instantiate(playerListPrefab);
                 playerListGameObject.transform.SetParent(playerListContent.transform);
                 playerListGameObject.transform.localScale = Vector3.one;
+                // ActorNumber stands for ID number of player
                 playerListGameObject.GetComponent<PlayerListEntryInitializer>().Initialize(player.ActorNumber, player.NickName);
+                // Add player to the list of player game objects
+                playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
             }
         }
+    }
+
+    // Another player joins room 
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        GameObject playerListGameObject = Instantiate(playerListPrefab);
+        playerListGameObject.transform.SetParent(playerListContent.transform);
+        playerListGameObject.transform.localScale = Vector3.one;
+        playerListGameObject.GetComponent<PlayerListEntryInitializer>().Initialize(newPlayer.ActorNumber, newPlayer.NickName);
+        playerListGameObjects.Add(newPlayer.ActorNumber, playerListGameObject);
+    }
+
+    // Another player leaves the room 
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        // Destroy game object of player, who left from our room, and remove him from player list
+        Destroy(playerListGameObjects[otherPlayer.ActorNumber].gameObject);
+        playerListGameObjects.Remove(otherPlayer.ActorNumber);
+    }
+
+    // We leave the room
+    public override void OnLeftRoom()
+    {
+        ActivatePanel(gameOptionsUIPanel.name);
+        // Destroy every game object in player list
+        foreach (GameObject playerListGameObject in playerListGameObjects.Values)
+        {
+            Destroy(playerListGameObject);
+        }
+        // Clear the content of player list objects 
+        playerListGameObjects.Clear();
+        playerListGameObjects = null;
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)

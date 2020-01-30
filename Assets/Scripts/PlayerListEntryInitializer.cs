@@ -15,5 +15,4 @@ public class PlayerListEntryInitializer : MonoBehaviour
     {
         playerNameText.text = playerName;
     }
-
 }

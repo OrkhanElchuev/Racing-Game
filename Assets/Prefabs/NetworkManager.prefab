@@ -51,4 +51,5 @@ MonoBehaviour:
   createRoomUIPanel: {fileID: 0}
   roomNameInputField: {fileID: 0}
   insideRoomUIPanel: {fileID: 0}
+  roomInfoText: {fileID: 0}
   joinRandomRoomUIPanel: {fileID: 0}

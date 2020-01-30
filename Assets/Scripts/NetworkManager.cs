@@ -51,6 +51,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region Public Methods
 
+    // Update text information about room name. current player count in Inside Room Panel
+    public void UpdateRoomInfoText()
+    {
+        roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
+            " Players/Max.Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " +
+            PhotonNetwork.CurrentRoom.MaxPlayers;
+    }
+
     public void SetGameMode(string newGameMode)
     {
         gameMode = newGameMode;
@@ -176,10 +184,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
         if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gameMode"))
         {
-            roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
-                " Players/Max.Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " +
-                PhotonNetwork.CurrentRoom.MaxPlayers;
-
+           UpdateRoomInfoText();
             if (playerListGameObjects == null)
             {
                 playerListGameObjects = new Dictionary<int, GameObject>();
@@ -202,6 +207,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // Another player joins room 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        UpdateRoomInfoText();
         GameObject playerListGameObject = Instantiate(playerListPrefab);
         playerListGameObject.transform.SetParent(playerListContent.transform);
         playerListGameObject.transform.localScale = Vector3.one;
@@ -212,6 +218,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // Another player leaves the room 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
+        UpdateRoomInfoText();
         // Destroy game object of player, who left from our room, and remove him from player list
         Destroy(playerListGameObjects[otherPlayer.ActorNumber].gameObject);
         playerListGameObjects.Remove(otherPlayer.ActorNumber);

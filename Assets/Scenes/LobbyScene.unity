@@ -96,7 +96,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -7723,6 +7722,11 @@ PrefabInstance:
       propertyPath: insideRoomUIPanel
       value: 
       objectReference: {fileID: 1598625407}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: roomInfoText
+      value: 
+      objectReference: {fileID: 314537884}
     - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
       propertyPath: joinRandomRoomUIPanel

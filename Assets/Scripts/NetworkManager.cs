@@ -7,61 +7,61 @@ using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    [Header ("Login UI")]
+    [Header("Login UI")]
     public GameObject loginUIPanel;
     public InputField playerNameInputField;
 
-    [Header ("Connecting Info Panel")]
+    [Header("Connecting Info Panel")]
     public GameObject connectingInfoUIPanel;
 
-    [Header ("Creating Room Info Panel")]
+    [Header("Creating Room Info Panel")]
     public GameObject creatingRoomInfoUIPanel;
 
-    [Header ("GameOptions  Panel")]
+    [Header("GameOptions  Panel")]
     public GameObject gameOptionsUIPanel;
 
-    [Header ("Create Room Panel")]
+    [Header("Create Room Panel")]
     public GameObject createRoomUIPanel;
     public InputField roomNameInputField;
     private string gameMode;
 
-    [Header ("Inside Room Panel")]
+    [Header("Inside Room Panel")]
     public GameObject insideRoomUIPanel;
     public Text roomInfoText;
     public GameObject playerListPrefab;
     public GameObject playerListContent;
 
-    [Header ("Join Random Room Panel")]
+    [Header("Join Random Room Panel")]
     public GameObject joinRandomRoomUIPanel;
 
     #region Unity Methods
 
     // Start is called before the first frame update
-    void Start ()
+    void Start()
     {
         // Activate login Panel when the game starts
-        ActivatePanel (loginUIPanel.name);
+        ActivatePanel(loginUIPanel.name);
     }
 
     #endregion
 
     #region Public Methods
 
-    public void SetGameMode (string newGameMode)
+    public void SetGameMode(string newGameMode)
     {
         gameMode = newGameMode;
     }
 
     // Activate relevant panel
-    public void ActivatePanel (string panelNameToBeActivated)
+    public void ActivatePanel(string panelNameToBeActivated)
     {
-        loginUIPanel.SetActive (loginUIPanel.name.Equals (panelNameToBeActivated));
-        connectingInfoUIPanel.SetActive (connectingInfoUIPanel.name.Equals (panelNameToBeActivated));
-        creatingRoomInfoUIPanel.SetActive (creatingRoomInfoUIPanel.name.Equals (panelNameToBeActivated));
-        createRoomUIPanel.SetActive (createRoomUIPanel.name.Equals (panelNameToBeActivated));
-        gameOptionsUIPanel.SetActive (gameOptionsUIPanel.name.Equals (panelNameToBeActivated));
-        joinRandomRoomUIPanel.SetActive (joinRandomRoomUIPanel.name.Equals (panelNameToBeActivated));
-        insideRoomUIPanel.SetActive (insideRoomUIPanel.name.Equals (panelNameToBeActivated));
+        loginUIPanel.SetActive(loginUIPanel.name.Equals(panelNameToBeActivated));
+        connectingInfoUIPanel.SetActive(connectingInfoUIPanel.name.Equals(panelNameToBeActivated));
+        creatingRoomInfoUIPanel.SetActive(creatingRoomInfoUIPanel.name.Equals(panelNameToBeActivated));
+        createRoomUIPanel.SetActive(createRoomUIPanel.name.Equals(panelNameToBeActivated));
+        gameOptionsUIPanel.SetActive(gameOptionsUIPanel.name.Equals(panelNameToBeActivated));
+        joinRandomRoomUIPanel.SetActive(joinRandomRoomUIPanel.name.Equals(panelNameToBeActivated));
+        insideRoomUIPanel.SetActive(insideRoomUIPanel.name.Equals(panelNameToBeActivated));
     }
 
     #endregion
@@ -69,75 +69,75 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region UI Callback methods
 
     // Join Room button is located in Game Options Panel
-    public void OnJoinRandomRoomButtonClicked (string gameModeArg)
+    public void OnJoinRandomRoomButtonClicked(string gameModeArg)
     {
         gameMode = gameModeArg;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties =
-            new ExitGames.Client.Photon.Hashtable () { { "gameMode", gameModeArg } };
-        PhotonNetwork.JoinRandomRoom (expectedCustomRoomProperties, 0);
+            new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameModeArg } };
+        PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
 
     // Create room button is located in Create Room Panel
-    public void OnCreateRoomButtonClicked ()
+    public void OnCreateRoomButtonClicked()
     {
         // Check if game mode exists
         if (gameMode != null)
         {
-            ActivatePanel (creatingRoomInfoUIPanel.name);
+            ActivatePanel(creatingRoomInfoUIPanel.name);
             // Assign roomName to the room name entered by user
             string roomName = roomNameInputField.text;
-            if (string.IsNullOrEmpty (roomName))
+            if (string.IsNullOrEmpty(roomName))
             {
                 // If room name is not entered generate random room name(e.g. Room 243)
-                roomName = "Room " + Random.Range (1, 1000);
+                roomName = "Room " + Random.Range(1, 1000);
             }
             // Set room configurations
-            RoomOptions roomOptions = new RoomOptions ();
+            RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 3;
 
             string[] roomPropertiesInLobby = { "gameMode" };
             // Create new hashtable in Photon server
-            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable () { { "gameMode", gameMode } };
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameMode } };
             // Assign custom room properties
             roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
             roomOptions.CustomRoomProperties = customRoomProperties;
             // Create room with relevant name and option
-            PhotonNetwork.CreateRoom (roomName, roomOptions);
+            PhotonNetwork.CreateRoom(roomName, roomOptions);
         }
     }
 
     // Cancel button is located in Create Room Panel
-    public void OnCancelButtonClicked ()
+    public void OnCancelButtonClicked()
     {
-        ActivatePanel (gameOptionsUIPanel.name);
+        ActivatePanel(gameOptionsUIPanel.name);
     }
 
     // Login button is located in Login Panel 
-    public void OnLoginButtonClicked ()
+    public void OnLoginButtonClicked()
     {
         // Assign playerName to the player name entered by user
         string playerName = playerNameInputField.text;
-        if (!string.IsNullOrEmpty (playerName))
+        if (!string.IsNullOrEmpty(playerName))
         {
             // Make transition to Connecting panel till connection to Photon Server is established
-            ActivatePanel (connectingInfoUIPanel.name);
+            ActivatePanel(connectingInfoUIPanel.name);
             if (!PhotonNetwork.IsConnected)
             {
                 // Set the player name in server and connect 
                 PhotonNetwork.LocalPlayer.NickName = playerName;
-                PhotonNetwork.ConnectUsingSettings ();
+                PhotonNetwork.ConnectUsingSettings();
             }
         }
         else
         {
-            Debug.Log ("Player name is Invalid");
+            Debug.Log("Player name is Invalid");
         }
     }
 
     // Back button is located in Join Random Room Panel
-    public void OnBackButtonClicked ()
+    public void OnBackButtonClicked()
     {
-        ActivatePanel (gameOptionsUIPanel.name);
+        ActivatePanel(gameOptionsUIPanel.name);
     }
 
     #endregion
@@ -145,31 +145,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Photon Callbacks
 
     // On connected to the Internet
-    public override void OnConnected ()
+    public override void OnConnected()
     {
-        Debug.Log ("Connected to the Internet");
+        Debug.Log("Connected to the Internet");
     }
 
     // On connected to the Photon Server
-    public override void OnConnectedToMaster ()
+    public override void OnConnectedToMaster()
     {
-        ActivatePanel (gameOptionsUIPanel.name);
-        Debug.Log (PhotonNetwork.LocalPlayer.NickName + " is connected to the server");
+        ActivatePanel(gameOptionsUIPanel.name);
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " is connected to the server");
     }
 
-    public override void OnCreatedRoom ()
+    public override void OnCreatedRoom()
     {
-        Debug.Log (PhotonNetwork.CurrentRoom.Name + " is created.");
+        Debug.Log(PhotonNetwork.CurrentRoom.Name + " is created.");
     }
 
-    public override void OnJoinedRoom ()
+    public override void OnJoinedRoom()
     {
-        Debug.Log (PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +
             "Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
 
-        ActivatePanel (insideRoomUIPanel.name);
+        ActivatePanel(insideRoomUIPanel.name);
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
-        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey ("gameMode"))
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gameMode"))
         {
             roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
                 " Players/Max.Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " +
@@ -180,34 +180,35 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 GameObject playerListGameObject = Instantiate(playerListPrefab);
                 playerListGameObject.transform.SetParent(playerListContent.transform);
                 playerListGameObject.transform.localScale = Vector3.one;
+                playerListGameObject.GetComponent<PlayerListEntryInitializer>().Initialize(player.ActorNumber, player.NickName);
             }
         }
     }
 
-    public override void OnJoinRandomFailed (short returnCode, string message)
+    public override void OnJoinRandomFailed(short returnCode, string message)
     {
         // If room doesnt exist, create one
         if (gameMode != null)
         {
             // Assign roomName to the room name entered by user
             string roomName = roomNameInputField.text;
-            if (string.IsNullOrEmpty (roomName))
+            if (string.IsNullOrEmpty(roomName))
             {
                 // If room name is not entered generate random room name(e.g. Room 243)
-                roomName = "Room " + Random.Range (1, 1000);
+                roomName = "Room " + Random.Range(1, 1000);
             }
             // Set room configurations
-            RoomOptions roomOptions = new RoomOptions ();
+            RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 3;
 
             string[] roomPropertiesInLobby = { "gameMode" };
             // Create new hashtable in Photon server
-            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable () { { "gameMode", gameMode } };
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameMode } };
             // Assign custom room properties
             roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
             roomOptions.CustomRoomProperties = customRoomProperties;
             // Create room with relevant name and option
-            PhotonNetwork.CreateRoom (roomName, roomOptions);
+            PhotonNetwork.CreateRoom(roomName, roomOptions);
         }
     }
 

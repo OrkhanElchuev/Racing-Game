@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 1294863439285215958}
   - component: {fileID: 1294863439285200682}
   - component: {fileID: 1294863439285280604}
-  - component: {fileID: 2378587775729410043}
+  - component: {fileID: 4066374476673512235}
   m_Layer: 5
   m_Name: PlayerListPrefab
   m_TagString: Untagged
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
---- !u!114 &2378587775729410043
+--- !u!114 &4066374476673512235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

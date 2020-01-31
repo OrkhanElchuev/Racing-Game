@@ -45,6 +45,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         // Activate login Panel when the game starts
         ActivatePanel(loginUIPanel.name);
+        // Synchronize the scene in network
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     #endregion
@@ -106,8 +108,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             // Set room configurations
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 3;
-
             string[] roomPropertiesInLobby = { "gameMode" };
+
             // Create new hashtable in Photon server
             ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameMode } };
             // Assign custom room properties
@@ -152,6 +154,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ActivatePanel(gameOptionsUIPanel.name);
     }
 
+    // Leave Game button is located in Inside Room Panel
+    public void OnLeaveGameButtonClicked()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
     #endregion
 
     #region Photon Callbacks
@@ -184,7 +192,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
         if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gameMode"))
         {
-           UpdateRoomInfoText();
+            UpdateRoomInfoText();
             if (playerListGameObjects == null)
             {
                 playerListGameObjects = new Dictionary<int, GameObject>();
@@ -212,6 +220,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         playerListGameObject.transform.SetParent(playerListContent.transform);
         playerListGameObject.transform.localScale = Vector3.one;
         playerListGameObject.GetComponent<PlayerListEntryInitializer>().Initialize(newPlayer.ActorNumber, newPlayer.NickName);
+
         playerListGameObjects.Add(newPlayer.ActorNumber, playerListGameObject);
     }
 

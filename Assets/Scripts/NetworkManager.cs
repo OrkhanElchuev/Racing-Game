@@ -206,6 +206,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 playerListGameObject.transform.localScale = Vector3.one;
                 // ActorNumber stands for ID number of player
                 playerListGameObject.GetComponent<PlayerListEntryInitializer>().Initialize(player.ActorNumber, player.NickName);
+
+                // Update the status of players in list (ready? / read!)
+                object isPlayerReady;
+                if (player.CustomProperties.TryGetValue(MultiplayerRacingGame.PLAYER_READY, out isPlayerReady))
+                {
+                    playerListGameObject.GetComponent<PlayerListEntryInitializer>().SetPlayerReady((bool)isPlayerReady);
+                }
+
                 // Add player to the list of player game objects
                 playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
             }

@@ -31,6 +31,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject playerListPrefab;
     public GameObject playerListContent;
     public GameObject startGameButton;
+    public Text GameModeText;
+    public Image PanelBackground;
+    public Sprite RacingBackground;
+    public Sprite DeathRaceBackground;
 
     [Header ("Join Random Room Panel")]
     public GameObject joinRandomRoomUIPanel;
@@ -92,6 +96,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
             " Players/Max.Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " +
             PhotonNetwork.CurrentRoom.MaxPlayers;
+    }
+
+    // Update background image and text according to the game mode "racing", "death race"
+    public void UpdateBackgroundAndText ()
+    {
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue ("rc"))
+        {
+            GameModeText.text = "LET'S RACE!";
+            PanelBackground.sprite = RacingBackground;
+        }
+        else if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue ("dr"))
+        {
+            GameModeText.text = "DEATH RACE!";
+            PanelBackground.sprite = DeathRaceBackground;
+        }
     }
 
     public void SetGameMode (string newGameMode)
@@ -254,7 +273,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
         if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey ("gm"))
         {
+            // Updating information and background picture
             UpdateRoomInfoText ();
+            UpdateBackgroundAndText();
+
             if (playerListGameObjects == null)
             {
                 playerListGameObjects = new Dictionary<int, GameObject> ();

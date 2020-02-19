@@ -7518,6 +7518,21 @@ PrefabInstance:
       objectReference: {fileID: 244169819}
     - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
+      propertyPath: startGameButton
+      value: 
+      objectReference: {fileID: 1279214256}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: GameModeText
+      value: 
+      objectReference: {fileID: 332149305}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: PanelBackground
+      value: 
+      objectReference: {fileID: 1598625409}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
       propertyPath: joinRandomRoomUIPanel
       value: 
       objectReference: {fileID: 1438516555}

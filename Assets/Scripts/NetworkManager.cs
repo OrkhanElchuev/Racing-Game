@@ -87,7 +87,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         gameMode = gameModeArg;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties =
-            new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameModeArg } };
+            new ExitGames.Client.Photon.Hashtable() { { "gm", gameModeArg } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
 
@@ -108,10 +108,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             // Set room configurations
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 3;
-            string[] roomPropertiesInLobby = { "gameMode" };
+            string[] roomPropertiesInLobby = { "gm" }; // gm - game mode
 
             // Create new hashtable in Photon server
-            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameMode } };
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gm", gameMode } }; // rc - racing
             // Assign custom room properties
             roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
             roomOptions.CustomRoomProperties = customRoomProperties;
@@ -204,7 +204,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         ActivatePanel(insideRoomUIPanel.name);
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
-        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gameMode"))
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gm"))
         {
             UpdateRoomInfoText();
             if (playerListGameObjects == null)
@@ -285,9 +285,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 3;
 
-            string[] roomPropertiesInLobby = { "gameMode" };
+            string[] roomPropertiesInLobby = { "gm" };
             // Create new hashtable in Photon server
-            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gameMode", gameMode } };
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gm", gameMode } };
             // Assign custom room properties
             roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
             roomOptions.CustomRoomProperties = customRoomProperties;

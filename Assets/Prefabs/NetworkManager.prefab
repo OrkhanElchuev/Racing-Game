@@ -55,4 +55,5 @@ MonoBehaviour:
   playerListPrefab: {fileID: 1294863439290794768, guid: 46f749e614f847a47940ad1dde964668,
     type: 3}
   playerListContent: {fileID: 0}
+  startGameButton: {fileID: 0}
   joinRandomRoomUIPanel: {fileID: 0}

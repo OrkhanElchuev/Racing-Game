@@ -7,31 +7,32 @@ using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    [Header("Login UI")]
+    [Header ("Login UI")]
     public GameObject loginUIPanel;
     public InputField playerNameInputField;
 
-    [Header("Connecting Info Panel")]
+    [Header ("Connecting Info Panel")]
     public GameObject connectingInfoUIPanel;
 
-    [Header("Creating Room Info Panel")]
+    [Header ("Creating Room Info Panel")]
     public GameObject creatingRoomInfoUIPanel;
 
-    [Header("GameOptions  Panel")]
+    [Header ("GameOptions  Panel")]
     public GameObject gameOptionsUIPanel;
 
-    [Header("Create Room Panel")]
+    [Header ("Create Room Panel")]
     public GameObject createRoomUIPanel;
     public InputField roomNameInputField;
     private string gameMode;
 
-    [Header("Inside Room Panel")]
+    [Header ("Inside Room Panel")]
     public GameObject insideRoomUIPanel;
     public Text roomInfoText;
     public GameObject playerListPrefab;
     public GameObject playerListContent;
+    public GameObject startGameButton;
 
-    [Header("Join Random Room Panel")]
+    [Header ("Join Random Room Panel")]
     public GameObject joinRandomRoomUIPanel;
 
     private Dictionary<int, GameObject> playerListGameObjects;
@@ -41,12 +42,44 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Unity Methods
 
     // Start is called before the first frame update
-    void Start()
+    void Start ()
     {
         // Activate login Panel when the game starts
-        ActivatePanel(loginUIPanel.name);
+        ActivatePanel (loginUIPanel.name);
         // Synchronize the scene in network
         PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    // To (enable/disable) the status of "Start button" according to the players' ready status
+    private bool CheckPlayersReadyStatus ()
+    {
+        // If not a master client
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            // return false to disable "Start button"
+            return false;
+        }
+        // Check if all players are ready, if one of them is not ready, return false to disable "Start button"
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            object isPlayerReady;
+            if (player.CustomProperties.TryGetValue (MultiplayerRacingGame.PLAYER_READY, out isPlayerReady))
+            {
+                if (!(bool) isPlayerReady)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     #endregion
@@ -54,28 +87,28 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Public Methods
 
     // Update text information about room name. current player count in Inside Room Panel
-    public void UpdateRoomInfoText()
+    public void UpdateRoomInfoText ()
     {
         roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
             " Players/Max.Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " +
             PhotonNetwork.CurrentRoom.MaxPlayers;
     }
 
-    public void SetGameMode(string newGameMode)
+    public void SetGameMode (string newGameMode)
     {
         gameMode = newGameMode;
     }
 
     // Activate relevant panel
-    public void ActivatePanel(string panelNameToBeActivated)
+    public void ActivatePanel (string panelNameToBeActivated)
     {
-        loginUIPanel.SetActive(loginUIPanel.name.Equals(panelNameToBeActivated));
-        connectingInfoUIPanel.SetActive(connectingInfoUIPanel.name.Equals(panelNameToBeActivated));
-        creatingRoomInfoUIPanel.SetActive(creatingRoomInfoUIPanel.name.Equals(panelNameToBeActivated));
-        createRoomUIPanel.SetActive(createRoomUIPanel.name.Equals(panelNameToBeActivated));
-        gameOptionsUIPanel.SetActive(gameOptionsUIPanel.name.Equals(panelNameToBeActivated));
-        joinRandomRoomUIPanel.SetActive(joinRandomRoomUIPanel.name.Equals(panelNameToBeActivated));
-        insideRoomUIPanel.SetActive(insideRoomUIPanel.name.Equals(panelNameToBeActivated));
+        loginUIPanel.SetActive (loginUIPanel.name.Equals (panelNameToBeActivated));
+        connectingInfoUIPanel.SetActive (connectingInfoUIPanel.name.Equals (panelNameToBeActivated));
+        creatingRoomInfoUIPanel.SetActive (creatingRoomInfoUIPanel.name.Equals (panelNameToBeActivated));
+        createRoomUIPanel.SetActive (createRoomUIPanel.name.Equals (panelNameToBeActivated));
+        gameOptionsUIPanel.SetActive (gameOptionsUIPanel.name.Equals (panelNameToBeActivated));
+        joinRandomRoomUIPanel.SetActive (joinRandomRoomUIPanel.name.Equals (panelNameToBeActivated));
+        insideRoomUIPanel.SetActive (insideRoomUIPanel.name.Equals (panelNameToBeActivated));
     }
 
     #endregion
@@ -83,81 +116,95 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region UI Callback methods
 
     // Join Room button is located in Game Options Panel
-    public void OnJoinRandomRoomButtonClicked(string gameModeArg)
+    public void OnJoinRandomRoomButtonClicked (string gameModeArg)
     {
         gameMode = gameModeArg;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties =
-            new ExitGames.Client.Photon.Hashtable() { { "gm", gameModeArg } };
-        PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
+            new ExitGames.Client.Photon.Hashtable ()
+            {
+                {
+                "gm",
+                gameModeArg
+                }
+            };
+        PhotonNetwork.JoinRandomRoom (expectedCustomRoomProperties, 0);
     }
 
     // Create room button is located in Create Room Panel
-    public void OnCreateRoomButtonClicked()
+    public void OnCreateRoomButtonClicked ()
     {
         // Check if game mode exists
         if (gameMode != null)
         {
-            ActivatePanel(creatingRoomInfoUIPanel.name);
+            ActivatePanel (creatingRoomInfoUIPanel.name);
             // Assign roomName to the room name entered by user
             string roomName = roomNameInputField.text;
-            if (string.IsNullOrEmpty(roomName))
+            if (string.IsNullOrEmpty (roomName))
             {
                 // If room name is not entered generate random room name(e.g. Room 243)
-                roomName = "Room " + Random.Range(1, 1000);
+                roomName = "Room " + Random.Range (1, 1000);
             }
             // Set room configurations
-            RoomOptions roomOptions = new RoomOptions();
+            RoomOptions roomOptions = new RoomOptions ();
             roomOptions.MaxPlayers = 3;
-            string[] roomPropertiesInLobby = { "gm" }; // gm - game mode
+            string[] roomPropertiesInLobby = {
+                "gm"
+            }; // gm - game mode
 
             // Create new hashtable in Photon server
-            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gm", gameMode } }; // rc - racing
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable ()
+            {
+                {
+                "gm",
+                gameMode
+                }
+            }; // rc - racing
             // Assign custom room properties
             roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
             roomOptions.CustomRoomProperties = customRoomProperties;
             // Create room with relevant name and option
-            PhotonNetwork.CreateRoom(roomName, roomOptions);
+            PhotonNetwork.CreateRoom (roomName, roomOptions);
         }
     }
 
     // Cancel button is located in Create Room Panel
-    public void OnCancelButtonClicked()
+    public void OnCancelButtonClicked ()
     {
-        ActivatePanel(gameOptionsUIPanel.name);
+        ActivatePanel (gameOptionsUIPanel.name);
     }
 
     // Login button is located in Login Panel 
-    public void OnLoginButtonClicked()
+    public void OnLoginButtonClicked ()
     {
         // Assign playerName to the player name entered by user
         string playerName = playerNameInputField.text;
-        if (!string.IsNullOrEmpty(playerName))
+        if (!string.IsNullOrEmpty (playerName))
         {
             // Make transition to Connecting panel till connection to Photon Server is established
-            ActivatePanel(connectingInfoUIPanel.name);
+            ActivatePanel (connectingInfoUIPanel.name);
             if (!PhotonNetwork.IsConnected)
             {
                 // Set the player name in server and connect 
                 PhotonNetwork.LocalPlayer.NickName = playerName;
-                PhotonNetwork.ConnectUsingSettings();
+                PhotonNetwork.ConnectUsingSettings ();
             }
         }
         else
         {
-            Debug.Log("Player name is Invalid");
+            Debug.Log ("Player name is Invalid");
         }
     }
 
     // Back button is located in Join Random Room Panel
-    public void OnBackButtonClicked()
+    public void OnBackButtonClicked ()
     {
-        ActivatePanel(gameOptionsUIPanel.name);
+        ActivatePanel (gameOptionsUIPanel.name);
     }
 
     // Leave Game button is located in Inside Room Panel
-    public void OnLeaveGameButtonClicked()
+    public void OnLeaveGameButtonClicked ()
     {
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LeaveRoom ();
     }
 
     #endregion
@@ -165,134 +212,155 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region Photon Callbacks
 
     // On connected to the Internet
-    public override void OnConnected()
+    public override void OnConnected ()
     {
-        Debug.Log("Connected to the Internet");
+        Debug.Log ("Connected to the Internet");
     }
 
     // On connected to the Photon Server
-    public override void OnConnectedToMaster()
+    public override void OnConnectedToMaster ()
     {
-        ActivatePanel(gameOptionsUIPanel.name);
-        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " is connected to the server");
+        ActivatePanel (gameOptionsUIPanel.name);
+        Debug.Log (PhotonNetwork.LocalPlayer.NickName + " is connected to the server");
     }
 
     // Updating player "Ready" status and making it visible for all the players in room
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    public override void OnPlayerPropertiesUpdate (Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         GameObject playerListGameObject;
-        if (playerListGameObjects.TryGetValue(targetPlayer.ActorNumber, out playerListGameObject))
+        if (playerListGameObjects.TryGetValue (targetPlayer.ActorNumber, out playerListGameObject))
         {
             object isPlayerReady;
-            if (changedProps.TryGetValue(MultiplayerRacingGame.PLAYER_READY, out isPlayerReady))
+            if (changedProps.TryGetValue (MultiplayerRacingGame.PLAYER_READY, out isPlayerReady))
             {
-                playerListGameObject.GetComponent<PlayerListEntryInitializer>().SetPlayerReady((bool)isPlayerReady);
+                playerListGameObject.GetComponent<PlayerListEntryInitializer> ().SetPlayerReady ((bool) isPlayerReady);
             }
         }
+        startGameButton.SetActive (CheckPlayersReadyStatus ());
     }
 
-    public override void OnCreatedRoom()
+    public override void OnCreatedRoom ()
     {
-        Debug.Log(PhotonNetwork.CurrentRoom.Name + " is created.");
+        Debug.Log (PhotonNetwork.CurrentRoom.Name + " is created.");
     }
 
     // When player joins room
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom ()
     {
-        Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +
+        Debug.Log (PhotonNetwork.LocalPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +
             "Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
 
-        ActivatePanel(insideRoomUIPanel.name);
+        ActivatePanel (insideRoomUIPanel.name);
         // Check if room contains a game mode (e.g. Racing, DeathMatch)
-        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("gm"))
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey ("gm"))
         {
-            UpdateRoomInfoText();
+            UpdateRoomInfoText ();
             if (playerListGameObjects == null)
             {
-                playerListGameObjects = new Dictionary<int, GameObject>();
+                playerListGameObjects = new Dictionary<int, GameObject> ();
             }
 
             // List newly joined players in the table
             foreach (Player player in PhotonNetwork.PlayerList)
             {
-                GameObject playerListGameObject = Instantiate(playerListPrefab);
-                playerListGameObject.transform.SetParent(playerListContent.transform);
+                GameObject playerListGameObject = Instantiate (playerListPrefab);
+                playerListGameObject.transform.SetParent (playerListContent.transform);
                 playerListGameObject.transform.localScale = Vector3.one;
                 // ActorNumber stands for ID number of player
-                playerListGameObject.GetComponent<PlayerListEntryInitializer>().Initialize(player.ActorNumber, player.NickName);
+                playerListGameObject.GetComponent<PlayerListEntryInitializer> ().Initialize (player.ActorNumber, player.NickName);
 
-                // Update the status of players in list (ready? / read!)
+                // Update the status of players in list (ready? / ready!)
                 object isPlayerReady;
-                if (player.CustomProperties.TryGetValue(MultiplayerRacingGame.PLAYER_READY, out isPlayerReady))
+                if (player.CustomProperties.TryGetValue (MultiplayerRacingGame.PLAYER_READY, out isPlayerReady))
                 {
-                    playerListGameObject.GetComponent<PlayerListEntryInitializer>().SetPlayerReady((bool)isPlayerReady);
+                    playerListGameObject.GetComponent<PlayerListEntryInitializer> ().SetPlayerReady ((bool) isPlayerReady);
                 }
-
                 // Add player to the list of player game objects
-                playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
+                playerListGameObjects.Add (player.ActorNumber, playerListGameObject);
             }
         }
+        // Start button is activated only if all players are ready(initially deactivated)
+        startGameButton.SetActive (false);
     }
 
     // Another player joins room 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public override void OnPlayerEnteredRoom (Player newPlayer)
     {
-        UpdateRoomInfoText();
-        GameObject playerListGameObject = Instantiate(playerListPrefab);
-        playerListGameObject.transform.SetParent(playerListContent.transform);
+        UpdateRoomInfoText ();
+        GameObject playerListGameObject = Instantiate (playerListPrefab);
+        playerListGameObject.transform.SetParent (playerListContent.transform);
         playerListGameObject.transform.localScale = Vector3.one;
-        playerListGameObject.GetComponent<PlayerListEntryInitializer>().Initialize(newPlayer.ActorNumber, newPlayer.NickName);
+        playerListGameObject.GetComponent<PlayerListEntryInitializer> ().Initialize (newPlayer.ActorNumber, newPlayer.NickName);
 
-        playerListGameObjects.Add(newPlayer.ActorNumber, playerListGameObject);
+        playerListGameObjects.Add (newPlayer.ActorNumber, playerListGameObject);
+        startGameButton.SetActive (CheckPlayersReadyStatus ());
     }
 
     // Another player leaves the room 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public override void OnPlayerLeftRoom (Player otherPlayer)
     {
-        UpdateRoomInfoText();
+        UpdateRoomInfoText ();
         // Destroy game object of player, who left from our room, and remove him from player list
-        Destroy(playerListGameObjects[otherPlayer.ActorNumber].gameObject);
-        playerListGameObjects.Remove(otherPlayer.ActorNumber);
+        Destroy (playerListGameObjects[otherPlayer.ActorNumber].gameObject);
+        playerListGameObjects.Remove (otherPlayer.ActorNumber);
+        startGameButton.SetActive (CheckPlayersReadyStatus ());
     }
 
     // We leave the room
-    public override void OnLeftRoom()
+    public override void OnLeftRoom ()
     {
-        ActivatePanel(gameOptionsUIPanel.name);
+        ActivatePanel (gameOptionsUIPanel.name);
         // Destroy every game object in player list
         foreach (GameObject playerListGameObject in playerListGameObjects.Values)
         {
-            Destroy(playerListGameObject);
+            Destroy (playerListGameObject);
         }
         // Clear the content of player list objects 
-        playerListGameObjects.Clear();
+        playerListGameObjects.Clear ();
         playerListGameObjects = null;
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
+    public override void OnJoinRandomFailed (short returnCode, string message)
     {
         // If room doesnt exist, create one
         if (gameMode != null)
         {
             // Assign roomName to the room name entered by user
             string roomName = roomNameInputField.text;
-            if (string.IsNullOrEmpty(roomName))
+            if (string.IsNullOrEmpty (roomName))
             {
                 // If room name is not entered generate random room name(e.g. Room 243)
-                roomName = "Room " + Random.Range(1, 1000);
+                roomName = "Room " + Random.Range (1, 1000);
             }
             // Set room configurations
-            RoomOptions roomOptions = new RoomOptions();
+            RoomOptions roomOptions = new RoomOptions ();
             roomOptions.MaxPlayers = 3;
 
-            string[] roomPropertiesInLobby = { "gm" };
+            string[] roomPropertiesInLobby = {
+                "gm"
+            };
             // Create new hashtable in Photon server
-            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "gm", gameMode } };
+            ExitGames.Client.Photon.Hashtable customRoomProperties = new ExitGames.Client.Photon.Hashtable ()
+            {
+                {
+                "gm",
+                gameMode
+                }
+            };
             // Assign custom room properties
             roomOptions.CustomRoomPropertiesForLobby = roomPropertiesInLobby;
             roomOptions.CustomRoomProperties = customRoomProperties;
             // Create room with relevant name and option
-            PhotonNetwork.CreateRoom(roomName, roomOptions);
+            PhotonNetwork.CreateRoom (roomName, roomOptions);
+        }
+    }
+
+    // Method is called when master client leaves the room, hence another player becomes master client
+    public override void OnMasterClientSwitched (Player newMasterClient)
+    {
+        if (PhotonNetwork.LocalPlayer.ActorNumber == newMasterClient.ActorNumber)
+        {
+            startGameButton.SetActive (CheckPlayersReadyStatus ());
         }
     }
 

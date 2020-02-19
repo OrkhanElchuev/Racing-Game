@@ -50,7 +50,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         // Activate login Panel when the game starts
         ActivatePanel (loginUIPanel.name);
-        // Synchronize the scene in network
+        // Synchronize the scene in network for all players
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
@@ -226,6 +226,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom ();
     }
 
+    // Start Game button is located in Inside Room panel
+    public void OnStartGameButtonClicked ()
+    {
+        // Check if game mode is selected and load relevant game scene
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey ("gm"))
+        {
+            if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue ("rc"))
+            {
+                PhotonNetwork.LoadLevel("RacingScene");
+            }
+            else if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue ("dr"))
+            {
+                PhotonNetwork.LoadLevel("DeathRaceScene");
+            }
+        }
+    }
+
     #endregion
 
     #region Photon Callbacks
@@ -275,7 +292,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             // Updating information and background picture
             UpdateRoomInfoText ();
-            UpdateBackgroundAndText();
+            UpdateBackgroundAndText ();
 
             if (playerListGameObjects == null)
             {

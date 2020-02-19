@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 196050645117304323}
   - component: {fileID: 196050645117304322}
-  - component: {fileID: 4660216329090637505}
+  - component: {fileID: 3457710351197350661}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -63,7 +63,7 @@ MonoBehaviour:
   DeathRaceBackground: {fileID: 21300000, guid: ffa5b662caf5e0d4abe760fcb445f479,
     type: 3}
   joinRandomRoomUIPanel: {fileID: 0}
---- !u!114 &4660216329090637505
+--- !u!114 &3457710351197350661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

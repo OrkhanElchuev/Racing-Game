@@ -316,7 +316,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 991138119}
+      - m_Target: {fileID: 1839189613}
         m_MethodName: NextCar
         m_Mode: 1
         m_Arguments:
@@ -3738,18 +3738,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986168902}
   m_CullTransparentMesh: 0
---- !u!114 &991138119 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4660216329090637505, guid: 82291e54cf26cda4084363de6a8ef625,
-    type: 3}
-  m_PrefabInstance: {fileID: 196050644375320240}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 503f7db94accdc74face852d6c15301f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1015092989
 GameObject:
   m_ObjectHideFlags: 0
@@ -4706,7 +4694,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 991138119}
+      - m_Target: {fileID: 1839189613}
         m_MethodName: PreviousCar
         m_Mode: 1
         m_Arguments:
@@ -6765,6 +6753,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833322808}
   m_CullTransparentMesh: 0
+--- !u!114 &1839189613 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3457710351197350661, guid: 82291e54cf26cda4084363de6a8ef625,
+    type: 3}
+  m_PrefabInstance: {fileID: 196050644375320240}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503f7db94accdc74face852d6c15301f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1859307862
 GameObject:
   m_ObjectHideFlags: 0
@@ -7548,11 +7548,6 @@ PrefabInstance:
       propertyPath: joinRandomRoomUIPanel
       value: 
       objectReference: {fileID: 1438516555}
-    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 196050645117304323, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7608,17 +7603,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4660216329090637505, guid: 82291e54cf26cda4084363de6a8ef625,
+    - target: {fileID: 3457710351197350661, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
       propertyPath: selectableCars.Array.data[0]
       value: 
       objectReference: {fileID: 1833322808}
-    - target: {fileID: 4660216329090637505, guid: 82291e54cf26cda4084363de6a8ef625,
+    - target: {fileID: 3457710351197350661, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
       propertyPath: selectableCars.Array.data[1]
       value: 
       objectReference: {fileID: 1736180112}
-    - target: {fileID: 4660216329090637505, guid: 82291e54cf26cda4084363de6a8ef625,
+    - target: {fileID: 3457710351197350661, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
       propertyPath: selectableCars.Array.data[2]
       value: 

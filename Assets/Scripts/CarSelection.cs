@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class CarSelection : MonoBehaviour
@@ -25,6 +26,9 @@ public class CarSelection : MonoBehaviour
         }
         // Activate relevant player car
         selectableCars[i].SetActive (true);
+
+        ExitGames.Client.Photon.Hashtable carSelectionProp = new ExitGames.Client.Photon.Hashtable () { { MultiplayerRacingGame.CAR_SELECTION_NUMBER, carSelectionNumber } };
+        PhotonNetwork.LocalPlayer.SetCustomProperties (carSelectionProp);
     }
 
     // Move to the next car in the list
@@ -46,6 +50,6 @@ public class CarSelection : MonoBehaviour
         {
             carSelectionNumber = selectableCars.Length - 1;
         }
-        ActivateCar(carSelectionNumber);
+        ActivateCar (carSelectionNumber);
     }
 }

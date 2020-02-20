@@ -9,6 +9,7 @@ public class RacingModeGameManager : MonoBehaviour
     public GameObject[] carPrefabs;
     public Transform[] instantiatePositions;
     public Text TimeUIText;
+    public List<GameObject> lapTriggers  = new List<GameObject>();
 
     // Singleton implementation 
     public static RacingModeGameManager instance = null;

@@ -22,7 +22,6 @@ public class RacingModeGameManager : MonoBehaviour
         {
             instance = this;
         }
-        // If instance already exists and it is not this
         else if (instance != this)
         {
             // Destroy this. This enforces our singleton pattern, we can have only one singleton

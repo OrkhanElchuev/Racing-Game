@@ -9,13 +9,31 @@ public class Shooting : MonoBehaviour
     public Camera playerCamera;
     public DeathRacePlayer deathRacePlayerProperties;
 
+    private float fireRate;
+    private float fireTime = 0.0f;
+
+    void Start ()
+    {
+        // Set the fire rate from scriptable object
+        fireRate = deathRacePlayerProperties.fireRate;
+    }
+
     // Update is called once per frame
     void Update ()
     {
         // If "space" key is pressed then shoot
         if (Input.GetKey ("space"))
         {
-            Fire ();
+            if (fireTime > fireRate)
+            {
+                Fire ();
+                fireTime = 0.0f;
+            }
+        }
+
+        if (fireTime < fireRate)
+        {
+            fireTime += Time.deltaTime;
         }
     }
 
@@ -23,8 +41,8 @@ public class Shooting : MonoBehaviour
     public void Fire ()
     {
         // 0.5f, 0.5f for allocating ray in the middle of the screen
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-        GameObject bulletGameObject = Instantiate(bulletPrefab, firePosition.position, Quaternion.identity);
-        bulletGameObject.GetComponent<Bullet>().Initialize(ray.direction, deathRacePlayerProperties.bulletSpeed, deathRacePlayerProperties.damage);
+        Ray ray = playerCamera.ViewportPointToRay (new Vector3 (0.5f, 0.5f));
+        GameObject bulletGameObject = Instantiate (bulletPrefab, firePosition.position, Quaternion.identity);
+        bulletGameObject.GetComponent<Bullet> ().Initialize (ray.direction, deathRacePlayerProperties.bulletSpeed, deathRacePlayerProperties.damage);
     }
 }

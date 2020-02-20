@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 1054343490158753472}
   - component: {fileID: 3247430957523395437}
   - component: {fileID: 4962212116156930879}
+  - component: {fileID: 3922059872887133869}
   m_Layer: 0
   m_Name: DG_Player_CarJeep
   m_TagString: Player
@@ -340,6 +341,24 @@ MonoBehaviour:
   thrustForce: {x: 0, y: 0, z: 45}
   rotationTorque: {x: 0, y: 8, z: 0}
   controlsEnabled: 0
+--- !u!114 &3922059872887133869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297249700076169209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1401419a8001944b6c78f6e5ac3c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2341865712234042820, guid: 2f77b45aab7070c4aad64a0699fbb716,
+    type: 3}
+  firePosition: {fileID: 1721425625}
+  playerCamera: {fileID: 5697894330807671576}
+  deathRacePlayerProperties: {fileID: 11400000, guid: e6dda14d7fb20e74d8e3d356a20ace9e,
+    type: 2}
 --- !u!1 &4512136407534517126
 GameObject:
   m_ObjectHideFlags: 0

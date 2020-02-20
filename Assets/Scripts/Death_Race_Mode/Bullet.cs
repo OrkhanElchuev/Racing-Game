@@ -12,4 +12,10 @@ public class Bullet : MonoBehaviour
 
         rb.velocity = direction * speed;
     }
+
+    // If bullet hits something, destroy itself
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+    }
 }

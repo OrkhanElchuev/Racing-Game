@@ -626,7 +626,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 6627638711101745525}
-  viewIdField: 1
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &-8162293904202660071
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4689008684380552187}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f329e0deeefe2cc4baa06fb45b337448, type: 3}
   m_Name: 
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrustForce: {x: 0, y: 0, z: 45}
   rotationTorque: {x: 0, y: 8, z: 0}
-  controlsEnabled: 1
+  controlsEnabled: 0
 --- !u!114 &1886663115848090429
 MonoBehaviour:
   m_ObjectHideFlags: 0

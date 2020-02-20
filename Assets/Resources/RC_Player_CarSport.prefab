@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 4843446967319708855}
   - component: {fileID: 1426469713}
   - component: {fileID: 6893637152615890400}
+  - component: {fileID: 6307071816466221142}
   m_Layer: 0
   m_Name: RC_Player_CarSport
   m_TagString: Untagged
@@ -164,10 +165,10 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 6307071816466221142}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -198,6 +199,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 2843014699275916359}
+--- !u!114 &6307071816466221142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523779623789243299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!1 &673072161277074943
 GameObject:
   m_ObjectHideFlags: 0

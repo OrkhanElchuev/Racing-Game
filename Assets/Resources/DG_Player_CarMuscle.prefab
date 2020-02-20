@@ -551,9 +551,9 @@ GameObject:
   - component: {fileID: 3482768827482843505}
   - component: {fileID: 6627638711101745525}
   - component: {fileID: 1886663115848090429}
-  - component: {fileID: 2710255938825002697}
-  - component: {fileID: 2380295960343217802}
   - component: {fileID: -5850294434698037442}
+  - component: {fileID: 6052266735257019562}
+  - component: {fileID: -7398678010453355403}
   m_Layer: 0
   m_Name: DG_Player_CarMuscle
   m_TagString: Player
@@ -664,35 +664,6 @@ MonoBehaviour:
   deathRacePlayerProperties: {fileID: 11400000, guid: fa35fb04b04c7404695f928fddb4af29,
     type: 2}
   lineRenderer: {fileID: 0}
---- !u!114 &2710255938825002697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4689008684380552187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f329e0deeefe2cc4baa06fb45b337448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1288364109427902234}
-  playerNameText: {fileID: 7201343586434115789}
---- !u!114 &2380295960343217802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4689008684380552187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da76b1d1c4ae9804daea6f1254aac306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrustForce: {x: 0, y: 0, z: 45}
-  rotationTorque: {x: 0, y: 8, z: 0}
-  controlsEnabled: 0
 --- !u!114 &-5850294434698037442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,6 +683,35 @@ MonoBehaviour:
   playerWeaponHolder: {fileID: 6629574214750171726}
   deathPanelUIPrefab: {fileID: 3593783272886976281, guid: 9bfb0f188d017884ca4192b2ecb55586,
     type: 3}
+--- !u!114 &6052266735257019562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689008684380552187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da76b1d1c4ae9804daea6f1254aac306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrustForce: {x: 0, y: 0, z: 45}
+  rotationTorque: {x: 0, y: 8, z: 0}
+  controlsEnabled: 0
+--- !u!114 &-7398678010453355403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689008684380552187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f329e0deeefe2cc4baa06fb45b337448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1288364109427902234}
+  playerNameText: {fileID: 7201343586434115789}
 --- !u!1 &6455898760384394329
 GameObject:
   m_ObjectHideFlags: 0

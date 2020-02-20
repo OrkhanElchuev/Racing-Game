@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1426469713}
   - component: {fileID: 6893637152615890400}
   - component: {fileID: 6307071816466221142}
+  - component: {fileID: 4326508745241191278}
   m_Layer: 0
   m_Name: RC_Player_CarSport
   m_TagString: Untagged
@@ -214,6 +215,18 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &4326508745241191278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523779623789243299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dc7592e73aac247bba480cbb43c539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &673072161277074943
 GameObject:
   m_ObjectHideFlags: 0

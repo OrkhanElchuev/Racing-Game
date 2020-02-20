@@ -11,6 +11,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start ()
     {
+        FindObjectOfType<Camera>().GetComponent<AudioListener>().enabled = false; 
         // Avoid controlling other players in the room, make sure to control only your own player
         if (photonView.IsMine)
         {

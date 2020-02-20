@@ -39,6 +39,29 @@ public class LapController : MonoBehaviourPun
         }
     }
 
+    // This method is called when object LapController is being enabled and active
+    private void OnEnable ()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+    }
+    
+    // This method is called when object LapController is being disabled and inactive
+    private void OnDisable ()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
+    }
+
+    void OnEvent (EventData photonEvent)
+    {
+        if (photonEvent.Code == (byte) RaisEventsCode.WhoFinishedEventCode)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            string nickNameOfFinishedPlayer = (string)data[0];
+            finishOrder = (int)data[1]; // 1 for winner, 2 for second place and etc.
+            Debug.Log(nickNameOfFinishedPlayer + " " + finishOrder);
+        }
+    }
+
     // When all lap triggers are passed game is finished
     void GameFinished ()
     {

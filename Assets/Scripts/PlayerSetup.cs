@@ -14,11 +14,13 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             GetComponent<CarMovement> ().enabled = true;
+            GetComponent<LapController>().enabled = true;
             playerCamera.enabled = true;
         }
         else
         {
             GetComponent<CarMovement> ().enabled = false;
+            GetComponent<LapController>().enabled = false;
             playerCamera.enabled = false;
         }
     }

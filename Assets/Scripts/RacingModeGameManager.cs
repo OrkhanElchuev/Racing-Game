@@ -17,7 +17,6 @@ public class RacingModeGameManager : MonoBehaviour
             object carSelectionNumber;
             if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue (MultiplayerRacingGame.CAR_SELECTION_NUMBER, out carSelectionNumber))
             {
-                Debug.Log((int)carSelectionNumber);
                 int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
                 // Instantiating players on different spots 
                 Vector3 instantiatePos = instantiatePositions[actorNumber - 1].position;

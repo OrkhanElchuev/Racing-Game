@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Bullet configurations
 public class Bullet : MonoBehaviour
 {
     // Initializing bullet 

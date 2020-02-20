@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+// Shooting mechanisms via rigid bodies( bullet, rocket) and rays (laser)
+public class Shooting : MonoBehaviourPun
 {
     public GameObject bulletPrefab;
     public Transform firePosition;
@@ -32,12 +34,18 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        // If the player is not ourselves do not listen to fire input
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         // If "space" key is pressed then shoot
         if (Input.GetKey ("space"))
         {
             if (fireTime > fireRate)
             {
-                Fire ();
+                // Synchronize shooting for all the player in room
+                photonView.RPC ("Fire", RpcTarget.All, firePosition.position);
                 fireTime = 0.0f;
             }
         }
@@ -49,7 +57,8 @@ public class Shooting : MonoBehaviour
     }
 
     // Method for instantiating bullets / rays
-    public void Fire ()
+    [PunRPC]
+    public void Fire (Vector3 firePos)
     {
         if (useLaser)
         {
@@ -70,7 +79,7 @@ public class Shooting : MonoBehaviour
                 lineRenderer.endWidth = 0.1f;
 
                 // Fire from the fire position
-                lineRenderer.SetPosition (0, firePosition.position);
+                lineRenderer.SetPosition (0, firePos);
                 lineRenderer.SetPosition (1, hit.point);
 
                 StopAllCoroutines ();
@@ -82,7 +91,7 @@ public class Shooting : MonoBehaviour
         {
             // 0.5f, 0.5f for allocating ray in the middle of the screen
             Ray ray = playerCamera.ViewportPointToRay (new Vector3 (0.5f, 0.5f));
-            GameObject bulletGameObject = Instantiate (bulletPrefab, firePosition.position, Quaternion.identity);
+            GameObject bulletGameObject = Instantiate (bulletPrefab, firePos, Quaternion.identity);
             bulletGameObject.GetComponent<Bullet> ().Initialize (ray.direction, deathRacePlayerProperties.bulletSpeed, deathRacePlayerProperties.damage);
         }
     }

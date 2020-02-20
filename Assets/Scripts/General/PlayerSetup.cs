@@ -48,7 +48,6 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
                 playerCamera.enabled = false;
             }
         }
-
         SetPlayerUI ();
     }
 

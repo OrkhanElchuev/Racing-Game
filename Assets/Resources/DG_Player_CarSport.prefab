@@ -237,10 +237,10 @@ GameObject:
   - component: {fileID: 1663159088154523984}
   - component: {fileID: 5924046281226392726}
   - component: {fileID: 5945438357724921948}
-  - component: {fileID: 3976210883121367213}
   - component: {fileID: 1002018984661164576}
-  - component: {fileID: 6939616705712640613}
   - component: {fileID: 262190841218163319}
+  - component: {fileID: 4716456388146865622}
+  - component: {fileID: 2295666970369479313}
   m_Layer: 0
   m_Name: DG_Player_CarSport
   m_TagString: Player
@@ -314,23 +314,9 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1002018984661164576}
-  viewIdField: 1
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3976210883121367213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3189090968767411349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f329e0deeefe2cc4baa06fb45b337448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 8985360257163249780}
-  playerNameText: {fileID: 8612707795153771747}
 --- !u!114 &1002018984661164576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,21 +332,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &6939616705712640613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3189090968767411349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da76b1d1c4ae9804daea6f1254aac306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrustForce: {x: 0, y: 0, z: 45}
-  rotationTorque: {x: 0, y: 8, z: 0}
-  controlsEnabled: 0
 --- !u!114 &262190841218163319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +350,35 @@ MonoBehaviour:
   deathRacePlayerProperties: {fileID: 11400000, guid: 85b481b2c7d6f354aab55b19f0547e43,
     type: 2}
   lineRenderer: {fileID: 1640175522}
+--- !u!114 &4716456388146865622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189090968767411349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da76b1d1c4ae9804daea6f1254aac306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrustForce: {x: 0, y: 0, z: 45}
+  rotationTorque: {x: 0, y: 8, z: 0}
+  controlsEnabled: 0
+--- !u!114 &2295666970369479313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189090968767411349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f329e0deeefe2cc4baa06fb45b337448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 8985360257163249780}
+  playerNameText: {fileID: 8612707795153771747}
 --- !u!1 &3537330560672789734
 GameObject:
   m_ObjectHideFlags: 0

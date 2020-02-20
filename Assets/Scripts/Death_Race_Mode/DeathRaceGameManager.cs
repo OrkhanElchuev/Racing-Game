@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
+// Death race mode game manager
 public class DeathRaceGameManager : MonoBehaviour
 {
     public GameObject[] carPrefabs;

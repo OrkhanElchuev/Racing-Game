@@ -217,10 +217,10 @@ GameObject:
   - component: {fileID: 2644790937767225916}
   - component: {fileID: 3672326727370610194}
   - component: {fileID: 8629211204846041193}
-  - component: {fileID: 1054343490158753472}
   - component: {fileID: 3247430957523395437}
-  - component: {fileID: 4962212116156930879}
   - component: {fileID: 3922059872887133869}
+  - component: {fileID: -1396265685401212726}
+  - component: {fileID: 7234742834549540834}
   m_Layer: 0
   m_Name: DG_Player_CarJeep
   m_TagString: Player
@@ -297,20 +297,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1054343490158753472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2297249700076169209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f329e0deeefe2cc4baa06fb45b337448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 5697894330807671576}
-  playerNameText: {fileID: 7265636615876480609}
 --- !u!114 &3247430957523395437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,21 +312,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &4962212116156930879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2297249700076169209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da76b1d1c4ae9804daea6f1254aac306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thrustForce: {x: 0, y: 0, z: 45}
-  rotationTorque: {x: 0, y: 8, z: 0}
-  controlsEnabled: 0
 --- !u!114 &3922059872887133869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +330,36 @@ MonoBehaviour:
   playerCamera: {fileID: 5697894330807671576}
   deathRacePlayerProperties: {fileID: 11400000, guid: e6dda14d7fb20e74d8e3d356a20ace9e,
     type: 2}
+  lineRenderer: {fileID: 0}
+--- !u!114 &-1396265685401212726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297249700076169209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da76b1d1c4ae9804daea6f1254aac306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thrustForce: {x: 0, y: 0, z: 45}
+  rotationTorque: {x: 0, y: 8, z: 0}
+  controlsEnabled: 0
+--- !u!114 &7234742834549540834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297249700076169209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f329e0deeefe2cc4baa06fb45b337448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 5697894330807671576}
+  playerNameText: {fileID: 7265636615876480609}
 --- !u!1 &4512136407534517126
 GameObject:
   m_ObjectHideFlags: 0

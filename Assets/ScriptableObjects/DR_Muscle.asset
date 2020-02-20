@@ -15,6 +15,6 @@ MonoBehaviour:
   playerName: Muscle
   playerSprite: {fileID: 21300000, guid: 1b41ebd21ba32ab4c9bac3db83cba88e, type: 3}
   weaponName: Machine Gun
-  damage: 5
+  damage: 4
   fireRate: 0.2
-  bulletSpeed: 80
+  bulletSpeed: 150

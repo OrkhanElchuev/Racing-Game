@@ -613,7 +613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &223612672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6392,7 +6392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1694358757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6618,7 +6618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1805289357
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7543,6 +7543,21 @@ PrefabInstance:
       propertyPath: PanelBackground
       value: 
       objectReference: {fileID: 1598625409}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: palyerSelectionUIGameObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 1833322808}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: palyerSelectionUIGameObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1736180112}
+    - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
+        type: 3}
+      propertyPath: palyerSelectionUIGameObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 299006209}
     - target: {fileID: 196050645117304322, guid: 82291e54cf26cda4084363de6a8ef625,
         type: 3}
       propertyPath: joinRandomRoomUIPanel

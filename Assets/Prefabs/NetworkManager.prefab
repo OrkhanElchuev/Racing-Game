@@ -62,6 +62,18 @@ MonoBehaviour:
   RacingBackground: {fileID: 21300000, guid: df5dd41c5770c434ca5c0f00460b1e12, type: 3}
   DeathRaceBackground: {fileID: 21300000, guid: ffa5b662caf5e0d4abe760fcb445f479,
     type: 3}
+  palyerSelectionUIGameObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deathRacePlayers:
+  - {fileID: 11400000, guid: e6dda14d7fb20e74d8e3d356a20ace9e, type: 2}
+  - {fileID: 11400000, guid: fa35fb04b04c7404695f928fddb4af29, type: 2}
+  - {fileID: 11400000, guid: 85b481b2c7d6f354aab55b19f0547e43, type: 2}
+  racingPlayers:
+  - {fileID: 11400000, guid: fe13c561500ed9c4b9e373f2aa0a24fc, type: 2}
+  - {fileID: 11400000, guid: b8dfbe3e915a1a04e966c133ad7ea6a7, type: 2}
+  - {fileID: 11400000, guid: 1cb6952ecef0567469f0dee2de397c3b, type: 2}
   joinRandomRoomUIPanel: {fileID: 0}
 --- !u!114 &3457710351197350661
 MonoBehaviour:

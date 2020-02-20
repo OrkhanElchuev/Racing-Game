@@ -36,6 +36,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Image PanelBackground;
     public Sprite RacingBackground;
     public Sprite DeathRaceBackground;
+    public GameObject[] palyerSelectionUIGameObjects;
+    public DeathRacePlayer[] deathRacePlayers;
+    public RacingPlayer[] racingPlayers;
 
     [Header ("Join Random Room Panel")]
     public GameObject joinRandomRoomUIPanel;
@@ -106,11 +109,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             GameModeText.text = "LET'S RACE!";
             PanelBackground.sprite = RacingBackground;
+            // Configuring UI for each car in racing mode ( player name, image )
+            for (int i = 0; i < palyerSelectionUIGameObjects.Length; i++)
+            {
+                palyerSelectionUIGameObjects[i].transform.Find ("PlayerName").GetComponent<Text> ().text = racingPlayers[i].playerName;
+                palyerSelectionUIGameObjects[i].GetComponent<Image> ().sprite = racingPlayers[i].playerSprite;
+                palyerSelectionUIGameObjects[i].transform.Find ("PlayerProperty").GetComponent<Text> ().text = " ";
+            }
         }
         else if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue ("dr"))
         {
             GameModeText.text = "DEATH RACE!";
             PanelBackground.sprite = DeathRaceBackground;
+            // Configuring UI for each car in death race mode ( player name, image, description)
+            for (int i = 0; i < palyerSelectionUIGameObjects.Length; i++)
+            {
+                palyerSelectionUIGameObjects[i].transform.Find ("PlayerName").GetComponent<Text> ().text = deathRacePlayers[i].playerName;
+                palyerSelectionUIGameObjects[i].GetComponent<Image> ().sprite = deathRacePlayers[i].playerSprite;
+                palyerSelectionUIGameObjects[i].transform.Find ("PlayerProperty").GetComponent<Text> ().text = deathRacePlayers[i].weaponName +
+                    ": " + "Damage: " + deathRacePlayers[i].damage + " Fire Rate: " + deathRacePlayers[i].fireRate;
+            }
         }
     }
 
@@ -235,11 +253,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue ("rc"))
             {
-                PhotonNetwork.LoadLevel("RacingScene");
+                PhotonNetwork.LoadLevel ("RacingScene");
             }
             else if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue ("dr"))
             {
-                PhotonNetwork.LoadLevel("DeathRaceScene");
+                PhotonNetwork.LoadLevel ("DeathRaceScene");
             }
         }
     }

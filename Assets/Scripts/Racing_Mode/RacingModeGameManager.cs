@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // Configurations for Racing game mode
-public class RacingModeGameManager : MonoBehaviour
+public class RacingModeGameManager : MonoBehaviourPunCallbacks
 {
     public GameObject[] carPrefabs;
     public Transform[] instantiatePositions;
@@ -50,7 +51,20 @@ public class RacingModeGameManager : MonoBehaviour
         // Disable winners order UI when the race starts
         foreach (GameObject gm in FinishOrderUIGameObjects)
         {
-            gm.SetActive(false);
+            gm.SetActive (false);
         }
+    }
+
+    // Quit Match button is located inside Racing Mode Scene
+    public void OnQuitMatchButtonClicked ()
+    {
+        // Leave the room
+        PhotonNetwork.LeaveRoom ();
+    }
+
+    // Load Lobby scene when player leaves the room
+    public override void OnLeftRoom ()
+    {
+        SceneManager.LoadScene ("LobbyScene");
     }
 }

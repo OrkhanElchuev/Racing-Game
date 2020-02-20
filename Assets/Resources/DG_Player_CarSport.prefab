@@ -71,7 +71,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 10}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 3976210883121367213}
   - component: {fileID: 1002018984661164576}
   - component: {fileID: 6939616705712640613}
+  - component: {fileID: 262190841218163319}
   m_Layer: 0
   m_Name: DG_Player_CarSport
   m_TagString: Player
@@ -313,7 +314,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1002018984661164576}
-  viewIdField: 0
+  viewIdField: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &3976210883121367213
@@ -360,6 +361,24 @@ MonoBehaviour:
   thrustForce: {x: 0, y: 0, z: 45}
   rotationTorque: {x: 0, y: 8, z: 0}
   controlsEnabled: 0
+--- !u!114 &262190841218163319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189090968767411349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1401419a8001944b6c78f6e5ac3c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 0}
+  firePosition: {fileID: 1640175523}
+  playerCamera: {fileID: 8985360257163249780}
+  deathRacePlayerProperties: {fileID: 11400000, guid: 85b481b2c7d6f354aab55b19f0547e43,
+    type: 2}
+  lineRenderer: {fileID: 1640175522}
 --- !u!1 &3537330560672789734
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +790,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tevfik
+  m_text: Orkhan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

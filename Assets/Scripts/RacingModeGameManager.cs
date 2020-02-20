@@ -10,7 +10,7 @@ public class RacingModeGameManager : MonoBehaviour
     public GameObject[] carPrefabs;
     public Transform[] instantiatePositions;
     public Text TimeUIText;
-    public List<GameObject> lapTriggers  = new List<GameObject>();
+    public List<GameObject> lapTriggers = new List<GameObject> ();
     public GameObject[] FinishOrderUIGameObjects;
 
     // Singleton implementation 
@@ -26,10 +26,10 @@ public class RacingModeGameManager : MonoBehaviour
         else if (instance != this)
         {
             // Destroy this. This enforces our singleton pattern, we can have only one singleton
-            Destroy(gameObject);
+            Destroy (gameObject);
         }
         // To not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad (gameObject);
     }
 
     // Start is called before the first frame update
@@ -46,6 +46,12 @@ public class RacingModeGameManager : MonoBehaviour
                 Vector3 instantiatePos = instantiatePositions[actorNumber - 1].position;
                 PhotonNetwork.Instantiate (carPrefabs[(int) carSelectionNumber].name, instantiatePos, Quaternion.identity);
             }
+        }
+
+        // Disable winners order UI when the race starts
+        foreach (GameObject gm in FinishOrderUIGameObjects)
+        {
+            gm.SetActive(false);
         }
     }
 }

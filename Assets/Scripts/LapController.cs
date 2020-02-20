@@ -4,6 +4,7 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Lap Controller with 6 triggers located on a racing track, each of them has to be triggered in order to finish the lap
 public class LapController : MonoBehaviourPun
@@ -47,7 +48,7 @@ public class LapController : MonoBehaviourPun
     {
         PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
     }
-    
+
     // This method is called when object LapController is being disabled and inactive
     private void OnDisable ()
     {
@@ -58,10 +59,26 @@ public class LapController : MonoBehaviourPun
     {
         if (photonEvent.Code == (byte) RaisEventsCode.WhoFinishedEventCode)
         {
-            object[] data = (object[])photonEvent.CustomData;
-            string nickNameOfFinishedPlayer = (string)data[0];
-            finishOrder = (int)data[1]; // 1 for winner, 2 for second place and etc.
-            Debug.Log(nickNameOfFinishedPlayer + " " + finishOrder);
+            object[] data = (object[]) photonEvent.CustomData;
+            string nickNameOfFinishedPlayer = (string) data[0];
+            finishOrder = (int) data[1]; // data[1] represents finish order
+            int viewID = (int) data[2]; // data[2] represents viewID
+
+            // Set the player winning order and activate the UI when player finishes the race
+            GameObject orderUITextGameObject = RacingModeGameManager.instance.FinishOrderUIGameObjects[finishOrder - 1];
+            orderUITextGameObject.SetActive (true);
+
+            // The player who has finished the game is myself
+            if (viewID == photonView.ViewID)
+            {
+                orderUITextGameObject.GetComponent<Text> ().text = finishOrder + ". " + nickNameOfFinishedPlayer + " (YOU)";
+                orderUITextGameObject.GetComponent<Text> ().color = Color.green;
+            }
+            // Another player has finished the race 
+            else
+            {
+                orderUITextGameObject.GetComponent<Text> ().text = finishOrder + ". " + nickNameOfFinishedPlayer;
+            }
         }
     }
 
@@ -74,7 +91,9 @@ public class LapController : MonoBehaviourPun
 
         finishOrder += 1;
         string nickName = photonView.Owner.NickName;
-        object[] data = new object[] { nickName, finishOrder };
+        int viewID = photonView.ViewID;
+        // Event data
+        object[] data = new object[] { nickName, finishOrder, viewID };
 
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions
         {
@@ -92,6 +111,6 @@ public class LapController : MonoBehaviourPun
         // Raising event to identify who won the race
         PhotonNetwork.RaiseEvent ((byte) RaisEventsCode.WhoFinishedEventCode, data, raiseEventOptions, sendOptions);
     }
-    
+
     #endregion
 }

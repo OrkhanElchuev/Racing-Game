@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 262190841218163319}
   - component: {fileID: 4716456388146865622}
   - component: {fileID: 2295666970369479313}
+  - component: {fileID: 5910466141056527400}
   m_Layer: 0
   m_Name: DG_Player_CarSport
   m_TagString: Player
@@ -379,6 +380,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 8985360257163249780}
   playerNameText: {fileID: 8612707795153771747}
+--- !u!114 &5910466141056527400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3189090968767411349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681a8fb3cecc07149a910f927f7245d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 100
+  healthBar: {fileID: 4743990239124289505}
 --- !u!1 &3537330560672789734
 GameObject:
   m_ObjectHideFlags: 0

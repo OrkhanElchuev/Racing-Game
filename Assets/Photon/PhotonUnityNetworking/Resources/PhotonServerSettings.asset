@@ -36,5 +36,6 @@ MonoBehaviour:
   - RespawnSpaceship
   - SetTime
   - StartRace
+  - DealDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1

@@ -81,6 +81,14 @@ public class Shooting : MonoBehaviourPun
                 // Fire from the fire position
                 lineRenderer.SetPosition (0, firePos);
                 lineRenderer.SetPosition (1, hit.point);
+                // Deal damage if collision object is a player
+                if (hit.collider.gameObject.CompareTag ("Player"))
+                {
+                    if (hit.collider.gameObject.GetComponent<PhotonView> ().IsMine)
+                    {
+                        hit.collider.gameObject.GetComponent<PhotonView> ().RPC ("DealDamage", RpcTarget.AllBuffered, deathRacePlayerProperties.damage);
+                    }
+                }
 
                 StopAllCoroutines ();
                 // Disable laser ray after 0.3 seconds 

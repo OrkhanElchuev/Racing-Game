@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 1886663115848090429}
   - component: {fileID: 2710255938825002697}
   - component: {fileID: 2380295960343217802}
+  - component: {fileID: -5850294434698037442}
   m_Layer: 0
   m_Name: DG_Player_CarMuscle
   m_TagString: Player
@@ -692,6 +693,20 @@ MonoBehaviour:
   thrustForce: {x: 0, y: 0, z: 45}
   rotationTorque: {x: 0, y: 8, z: 0}
   controlsEnabled: 0
+--- !u!114 &-5850294434698037442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689008684380552187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681a8fb3cecc07149a910f927f7245d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 100
+  healthBar: {fileID: 6169995472539599823}
 --- !u!1 &6455898760384394329
 GameObject:
   m_ObjectHideFlags: 0

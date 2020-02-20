@@ -15,6 +15,6 @@ MonoBehaviour:
   playerName: Jeep
   playerSprite: {fileID: 21300000, guid: 80a60b33c1baaf3488a05e8580884520, type: 3}
   weaponName: Rocket Launcher
-  damage: 35
-  fireRate: 2
+  damage: 50
+  fireRate: 2.5
   bulletSpeed: 120

@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 3922059872887133869}
   - component: {fileID: -1396265685401212726}
   - component: {fileID: 7234742834549540834}
+  - component: {fileID: 4794361310229346137}
   m_Layer: 0
   m_Name: DG_Player_CarJeep
   m_TagString: Player
@@ -360,6 +361,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 5697894330807671576}
   playerNameText: {fileID: 7265636615876480609}
+--- !u!114 &4794361310229346137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297249700076169209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 681a8fb3cecc07149a910f927f7245d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 100
+  healthBar: {fileID: 5946105997015590243}
 --- !u!1 &4512136407534517126
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +751,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.495
+  m_FillAmount: 0.456
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

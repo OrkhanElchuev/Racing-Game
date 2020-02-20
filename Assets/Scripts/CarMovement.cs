@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Basic Car movement mechanism via WASD keys created for testing purposes
 public class CarMovement : MonoBehaviour
 {
     Rigidbody rb;

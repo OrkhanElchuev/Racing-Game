@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
+// Car selection mechanism (3 different cars are available)
 public class CarSelection : MonoBehaviour
 {
     public GameObject[] selectableCars;

@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
+// Lap Controller with 6 triggers located on a racing track, each of them has to be triggered in order to finish the lap
 public class LapController : MonoBehaviourPun
 {
     private List<GameObject> LapTriggers = new List<GameObject> ();
@@ -22,6 +23,8 @@ public class LapController : MonoBehaviourPun
             LapTriggers.Add (lapTrigger);
         }
     }
+
+    #region Private Methods
 
     // Check if player has passed through lap triggers
     private void OnTriggerEnter (Collider other)
@@ -51,7 +54,7 @@ public class LapController : MonoBehaviourPun
         PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
     }
 
-    void OnEvent (EventData photonEvent)
+    private void OnEvent (EventData photonEvent)
     {
         if (photonEvent.Code == (byte) RaisEventsCode.WhoFinishedEventCode)
         {
@@ -63,7 +66,7 @@ public class LapController : MonoBehaviourPun
     }
 
     // When all lap triggers are passed game is finished
-    void GameFinished ()
+    private void GameFinished ()
     {
         // Disable player movement and set car following camera to null
         GetComponent<PlayerSetup> ().playerCamera.transform.parent = null;
@@ -89,4 +92,6 @@ public class LapController : MonoBehaviourPun
         // Raising event to identify who won the race
         PhotonNetwork.RaiseEvent ((byte) RaisEventsCode.WhoFinishedEventCode, data, raiseEventOptions, sendOptions);
     }
+    
+    #endregion
 }

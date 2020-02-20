@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using Photon.Pun;
 
+// Player list initialization inside game room
 public class PlayerListEntryInitializer : MonoBehaviour
 {
     [Header("UI Reference")]

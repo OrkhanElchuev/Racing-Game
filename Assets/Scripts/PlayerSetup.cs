@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
+// Player initial setup
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
     public Camera playerCamera;

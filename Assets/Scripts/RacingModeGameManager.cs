@@ -4,12 +4,14 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Configurations for Racing game mode
 public class RacingModeGameManager : MonoBehaviour
 {
     public GameObject[] carPrefabs;
     public Transform[] instantiatePositions;
     public Text TimeUIText;
     public List<GameObject> lapTriggers  = new List<GameObject>();
+    public GameObject[] FinishOrderUIGameObjects;
 
     // Singleton implementation 
     public static RacingModeGameManager instance = null;

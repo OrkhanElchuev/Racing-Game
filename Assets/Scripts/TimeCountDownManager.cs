@@ -4,6 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Time counter before the race starts
 public class TimeCountDownManager : MonoBehaviourPunCallbacks
 {
     private Text timeUIText;

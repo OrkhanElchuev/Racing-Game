@@ -5,6 +5,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
+// All the networking is done here, connecting to the server, managing panels, buttons and etc.
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [Header ("Login UI")]

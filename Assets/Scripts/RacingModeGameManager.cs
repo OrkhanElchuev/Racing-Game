@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RacingModeGameManager : MonoBehaviour
 {
     public GameObject[] carPrefabs;
     public Transform[] instantiatePositions;
+    public Text TimeUIText;
 
     // Singleton implementation 
     public static RacingModeGameManager instance = null;
